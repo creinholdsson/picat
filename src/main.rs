@@ -35,7 +35,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     schedule.push(Local.ymd(1970, 1, 1).and_hms(7, 30, 0));
     schedule.push(Local.ymd(1970, 1, 1).and_hms(11, 30, 0));
     schedule.push(Local.ymd(1970, 1, 1).and_hms(15, 30, 0));
-    schedule.push(Local.ymd(1970, 1, 1).and_hms(18, 21, 0));
+    schedule.push(Local.ymd(1970, 1, 1).and_hms(19, 30, 0));
     
     let pwm = Pwm::with_period(
         Channel::Pwm0,
