@@ -1,0 +1,9 @@
+[package]
+name = "picat"
+version = "0.1.0"
+authors = ["frosty"]
+edition = "2018"
+
+[dependencies]
+rppal = "0.11.3"
+chrono = "0.4.7"
