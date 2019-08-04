@@ -88,13 +88,13 @@ fn main() -> Result<(), Box<dyn Error>> {
         let local = Local::now();
 
         if schedule.contains(local) {
-            match feed_cat(&servo2, 700) {
+            match feed_cat(&servo2, 600) {
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
             }
-            thread::sleep(Duration::from_millis(6000));
+            thread::sleep(Duration::from_millis(3000));
 
-            match feed_cat(&servo1, 350) {
+            match feed_cat(&servo1, 360) {
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
             }
