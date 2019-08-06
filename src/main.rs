@@ -12,14 +12,18 @@ mod servo;
 const PERIOD_MS: u64 = 20;
 const PULSE_OPEN_US: u64 = 1850;
 const PULSE_CLOSED_US: u64 = 2400;
+const PULSE_PASSED_US: u64 = 2550;
 const PULSE_CLOSED_1_US: u64 = 1440;
 const PULSE_OPEN_1_US: u64 = 860;
+const PULSE_PASSED_1_US: u64 = 1600;
 
 fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> {
     match servo.pwm {
         Some(pwm) => {
             pwm.set_pulse_width(Duration::from_micros(servo.pulse_open))?;
             thread::sleep(Duration::from_millis(feed_time));
+            pwm.set_pulse_width(Duration::from_micros(servo.pulse_passed))?;
+            thread::sleep(Duration::from_millis(100));
             pwm.set_pulse_width(Duration::from_micros(servo.pulse_closed))?;
         }
         None => {
@@ -56,6 +60,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         Ok(ref p) => servo::Servo {
             pulse_closed: PULSE_CLOSED_US,
             pulse_open: PULSE_OPEN_US,
+            pulse_passed: PULSE_PASSED_US,
             pwm: Some(p),
         },
         Err(_) => {
@@ -63,6 +68,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             servo::Servo {
                 pulse_closed: PULSE_CLOSED_US,
                 pulse_open: PULSE_OPEN_US,
+                pulse_passed: PULSE_PASSED_US,
                 pwm: None,
             }
         }
@@ -72,6 +78,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         Ok(ref p) => servo::Servo {
             pulse_closed: PULSE_CLOSED_1_US,
             pulse_open: PULSE_OPEN_1_US,
+            pulse_passed: PULSE_PASSED_1_US,
             pwm: Some(p),
         },
         Err(_) => {
@@ -79,6 +86,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             servo::Servo {
                 pulse_closed: PULSE_CLOSED_US,
                 pulse_open: PULSE_OPEN_US,
+                pulse_passed: PULSE_PASSED_1_US,
                 pwm: None,
             }
         }
