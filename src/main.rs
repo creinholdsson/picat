@@ -102,7 +102,7 @@ fn main() -> Result<(), Box<dyn Error>> {
             }
             thread::sleep(Duration::from_millis(3000));
 
-            match feed_cat(&servo1, 360) {
+            match feed_cat(&servo1, 410) {
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
             }
