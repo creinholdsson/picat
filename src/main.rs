@@ -35,10 +35,64 @@ fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> 
 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut schedule = schedule::Schedule::new();
-    schedule.push(Local.ymd(1970, 1, 1).and_hms(7, 30, 0));
-    schedule.push(Local.ymd(1970, 1, 1).and_hms(11, 30, 0));
-    schedule.push(Local.ymd(1970, 1, 1).and_hms(15, 30, 0));
-    schedule.push(Local.ymd(1970, 1, 1).and_hms(19, 30, 0));
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(4, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(15, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(19, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
 
     loop {
         let local = Local::now();
@@ -96,13 +150,15 @@ fn main() -> Result<(), Box<dyn Error>> {
                 }
             };
 
-            match feed_cat(&servo2, 600) {
+            match feed_cat(&servo2, 2400 / schedule.occasions(local.weekday()) as u64) {
+                // 2400 tot
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
             }
             thread::sleep(Duration::from_millis(3000));
 
-            match feed_cat(&servo1, 460) {
+            match feed_cat(&servo1, 1840 / schedule.occasions(local.weekday()) as u64) {
+                // 1840 tot
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
             }
