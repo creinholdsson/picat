@@ -36,7 +36,7 @@ fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> 
 fn main() -> Result<(), Box<dyn Error>> {
     let mut schedule = schedule::Schedule::new();
     schedule.push(schedule::Occasion {
-        time: Local.ymd(1970, 1, 1).and_hms(4, 30, 0),
+        time: Local.ymd(1970, 1, 1).and_hms(4, 25, 0),
         enabled_weekdays: vec![
             Weekday::Mon,
             Weekday::Tue,
