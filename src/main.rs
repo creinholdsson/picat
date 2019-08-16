@@ -12,19 +12,22 @@ mod servo;
 const PERIOD_MS: u64 = 20;
 const PULSE_OPEN_US: u64 = 1850;
 const PULSE_CLOSED_US: u64 = 2400;
-const PULSE_PASSED_US: u64 = 2550;
+const PULSE_PASSED_US: u64 = 2650;
 const PULSE_CLOSED_1_US: u64 = 1440;
 const PULSE_OPEN_1_US: u64 = 860;
-const PULSE_PASSED_1_US: u64 = 1600;
+const PULSE_PASSED_1_US: u64 = 1700;
 
 fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> {
     match servo.pwm {
         Some(pwm) => {
             pwm.set_pulse_width(Duration::from_micros(servo.pulse_open))?;
             thread::sleep(Duration::from_millis(feed_time));
-            pwm.set_pulse_width(Duration::from_micros(servo.pulse_passed))?;
-            thread::sleep(Duration::from_millis(100));
-            pwm.set_pulse_width(Duration::from_micros(servo.pulse_closed))?;
+
+            for _ in 1..4 {
+                pwm.set_pulse_width(Duration::from_micros(servo.pulse_passed))?;
+                thread::sleep(Duration::from_millis(100));
+                pwm.set_pulse_width(Duration::from_micros(servo.pulse_closed))?;
+            }
         }
         None => {
             println!("Was gonna feed the cat!");
