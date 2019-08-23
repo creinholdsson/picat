@@ -38,7 +38,7 @@ impl Schedule {
                 return true;
             }
         }
-        return false;
+        false
     }
 
     pub fn occasions(&self, weekday: Weekday) -> i32 {

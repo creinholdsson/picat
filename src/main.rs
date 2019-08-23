@@ -46,6 +46,8 @@ fn main() -> Result<(), Box<dyn Error>> {
             Weekday::Wed,
             Weekday::Thu,
             Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
         ],
     });
     schedule.push(schedule::Occasion {
@@ -153,15 +155,15 @@ fn main() -> Result<(), Box<dyn Error>> {
                 }
             };
 
-            match feed_cat(&servo2, 2400 / schedule.occasions(local.weekday()) as u64) {
-                // 2400 tot
+            match feed_cat(&servo2, 2900 / schedule.occasions(local.weekday()) as u64) {
+                // 2900 tot
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
             }
             thread::sleep(Duration::from_millis(3000));
 
-            match feed_cat(&servo1, 1840 / schedule.occasions(local.weekday()) as u64) {
-                // 1840 tot
+            match feed_cat(&servo1, 2150 / schedule.occasions(local.weekday()) as u64) {
+                // 2150 tot
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
             }
