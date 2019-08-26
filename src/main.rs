@@ -155,14 +155,14 @@ fn main() -> Result<(), Box<dyn Error>> {
                 }
             };
 
-            match feed_cat(&servo2, 2900 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo2, 3100 / schedule.occasions(local.weekday()) as u64) {
                 // 2900 tot
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
             }
             thread::sleep(Duration::from_millis(3000));
 
-            match feed_cat(&servo1, 2150 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo1, 2300 / schedule.occasions(local.weekday()) as u64) {
                 // 2150 tot
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
