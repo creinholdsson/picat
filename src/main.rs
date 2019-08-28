@@ -25,7 +25,7 @@ fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> 
 
             for _ in 1..4 {
                 pwm.set_pulse_width(Duration::from_micros(servo.pulse_passed))?;
-                thread::sleep(Duration::from_millis(100));
+                thread::sleep(Duration::from_millis(150));
                 pwm.set_pulse_width(Duration::from_micros(servo.pulse_closed))?;
             }
         }
