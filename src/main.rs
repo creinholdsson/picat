@@ -75,7 +75,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         ],
     });
     schedule.push(schedule::Occasion {
-        time: Local.ymd(1970, 1, 1).and_hms(15, 30, 0),
+        time: Local.ymd(1970, 1, 1).and_hms(15, 03, 0),
         enabled_weekdays: vec![
             Weekday::Mon,
             Weekday::Tue,
