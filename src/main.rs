@@ -229,21 +229,19 @@ fn test_servo_loop() -> Result<(), Box<dyn Error>> {
                 }
             };
     
-    loop {
-        match feed_cat(&servo2, 1000) {
-            // 2900 tot
-            Ok(_) => println!("Fed the cat with servo 2"),
-            Err(_) => println!("Failed to feed the cat with servo 2"),
-        }
-        thread::sleep(Duration::from_millis(3000));
-
-        match feed_cat(&servo1, 1000) {
-            // 2150 tot
-            Ok(_) => println!("Fed the cat with servo 1"),
-            Err(_) => println!("Failed to feed the cat with servo 1"),
-        }
-        thread::sleep(Duration::from_millis(60000))
+    match feed_cat(&servo2, 1000) {
+        // 2900 tot
+        Ok(_) => println!("Fed the cat with servo 2"),
+        Err(_) => println!("Failed to feed the cat with servo 2"),
     }
+    thread::sleep(Duration::from_millis(3000));
+
+    match feed_cat(&servo1, 1000) {
+        // 2150 tot
+        Ok(_) => println!("Fed the cat with servo 1"),
+        Err(_) => println!("Failed to feed the cat with servo 1"),
+    }
+    Ok(())
 }
 
 fn main() {
@@ -251,10 +249,12 @@ fn main() {
 
     match args.len() {
         2 => {
-            main_feeder_loop();
+            println!("Running servo test");
+            test_servo_loop();
         },
         _ => {
-            test_servo_loop();
+            println!("Running feeder loop");
+            main_feeder_loop();
         }
     }
 }
