@@ -47,6 +47,10 @@ impl Schedule {
             .filter(|&x| (*x).is_enabled(weekday))
             .count() as i32
     }
+
+    pub fn get_times(&self) -> &Vec<Occasion> {
+        &self.times
+    }
 }
 
 #[test]
