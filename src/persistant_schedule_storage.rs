@@ -119,8 +119,8 @@ fn test_save_load() -> Result<(), (std::io::Error)> {
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
     });
 
-    save("/home/frosty/test.json", &schedule);
-    let loaded_schedule = load("/home/frosty/test.json")?;
+    save("test.json", &schedule);
+    let loaded_schedule = load("test.json")?;
 
     assert_eq!(1, loaded_schedule.get_times().len());
     Ok(())
