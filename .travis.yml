@@ -4,8 +4,9 @@ cache: cargo
 env: TARGET=arm-unknown-linux-gnueabihf CARGO_TARGET_ARM_UNKNOWN_LINUX_GNUEABIHF_LINKER=arm-linux-gnueabihf-gcc
 before_deploy: ci/before_deploy.sh
 deploy:
-  file: picat-$TRAVIS_TAG-$TARGET.tar.gz 
+  provider: releases
+  api_key:
+    secure: Vo60r81aQq+q3VBus5EibT8piGc1LeJc4c3I10MtiIfcGF/jDJTsRekUNRCJB5mHWX14Xwxh3LfTvTOrowWja7U4XX2pNV2h/IuD/OuVjbEJbDaZUaIolEIiuAdMAINaQR449BKGYFfrZDI+/N3f9X0baASgw6M3PhoS2Bt4g6lxo1YxnTJI8kAV7LwDMcNQZ3ZYY1kgrc+SymPXykfnjBfovlzQXwrG2Etxv8NllrYBN5h+X3I1CsNgJ2UWV4+i7jckx4SwqnVCksHCcpz2zAFsf5galZ58HFDhcQWkjMAbuAJNQAqM/7aXMeqScc5QooVccnNVtnB4kvvaJEUGuZE7KoENqJ/ZCmjZraeTEfjis6kbe6TfcLHb2B69AHEeqbtabRDZ1qQbFBBpZ0iHgU7q4tuCkX46GDUctTctROt/Sq92qTOP6jKV1urbp5G6gFb2N0qxPL/mYRCgpfFzkDOecwN6tUid7lbatuAyxNgRGSTjHsWNPxqgcQ1snSo4z/5PuF74zGh2Wh8IMGHlxPWwd81Zvm/CkV4rHB7XPiHjkxVXlm+4SPmZrUnx4qrIb+9PMKZqeLSDUqwjMGC1Dzs87phCaMxPeISsUrVVzvtfQXklfuGYH+BjzKkmp7yR0ZaP1g6bEyuYLUcGQeT8TnY8Qh/PUCzIRGaNqR/IsUk=
+  file: 'picat-$TRAVIS_TAG-$TARGET.tar.gz'
   on:
     repo: creinholdsson/picat
-  provider: releases
-
