@@ -10,3 +10,6 @@ deploy:
   file: 'picat-$TRAVIS_TAG-$TARGET.tar.gz'
   on:
     repo: creinholdsson/picat
+    branches:    
+      only:      
+        - releases 
