@@ -1,6 +1,6 @@
 [package]
 name = "picat"
-version = "0.3.1"
+version = "0.3.2"
 authors = ["Christofer R"]
 edition = "2018"
 
