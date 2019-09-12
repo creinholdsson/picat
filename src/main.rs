@@ -135,7 +135,7 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
                 }
             };
 
-            match feed_cat(&servo2, 2900 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo2, 3500 / schedule.occasions(local.weekday()) as u64) {
                 // 2900 tot
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
@@ -169,7 +169,7 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
                     }
                 }
             };
-            match feed_cat(&servo1, 3100 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo1, 3500 / schedule.occasions(local.weekday()) as u64) {
                 // 2150 tot
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),
