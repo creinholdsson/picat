@@ -66,6 +66,78 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
         ],
     });
     schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(8, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(9, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(10, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
         enabled_weekdays: vec![
             Weekday::Mon,
@@ -90,7 +162,55 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
         ],
     });
     schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(16, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(17, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(18, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(19, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(20, 30, 0),
         enabled_weekdays: vec![
             Weekday::Mon,
             Weekday::Tue,
