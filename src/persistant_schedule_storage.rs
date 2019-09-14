@@ -111,7 +111,7 @@ fn test_serialization() -> Result<(), ()> {
 
     let json = serialize(&schedule);
     let mut new_schedule = crate::schedule::Schedule::new();
-    let sched = deserialize(json.as_str(), &mut new_schedule);
+    let _sched = deserialize(json.as_str(), &mut new_schedule);
 
     println!("json: {}", json);
     assert_eq!(1, new_schedule.get_times().len());
@@ -129,7 +129,7 @@ fn test_save_load() -> Result<(), (std::io::Error)> {
         opened_time_servo2: 300
     });
 
-    save("test.json", &schedule);
+    save("test.json", &schedule)?;
     let loaded_schedule = load("test.json")?;
 
     assert_eq!(1, loaded_schedule.get_times().len());
