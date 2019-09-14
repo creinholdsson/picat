@@ -9,6 +9,8 @@ struct PersistedSchedule {
     enabled: bool,
     time: String,
     enabled_weekdays: Vec<u32>,
+    opened_time_servo1: u64,
+    opened_time_servo2: u64
 }
 
 fn weekday_to_int(weekday: Weekday) -> u32 {
@@ -47,6 +49,8 @@ pub fn serialize(schedule: &crate::schedule::Schedule) -> String {
             enabled: true,
             time: time.time.to_rfc3339(),
             enabled_weekdays: enabled_weekdays_int,
+            opened_time_servo1: time.opened_time_servo1,
+            opened_time_servo2: time.opened_time_servo2
         });
     }
     serde_json::to_string(&persisted_schedule).unwrap()
@@ -65,6 +69,8 @@ pub fn deserialize(json: &str, schedule: &mut crate::schedule::Schedule) -> Resu
                 schedule.push(crate::schedule::Occasion {
                     time: timestamp,
                     enabled_weekdays,
+                    opened_time_servo1: sched.opened_time_servo1,
+                    opened_time_servo2: sched.opened_time_servo2
                 });
             }
             Ok(())
@@ -99,6 +105,8 @@ fn test_serialization() -> Result<(), ()> {
     schedule.push(crate::schedule::Occasion {
         time: Local::now(),
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
 
     let json = serialize(&schedule);
@@ -117,6 +125,8 @@ fn test_save_load() -> Result<(), (std::io::Error)> {
     schedule.push(crate::schedule::Occasion {
         time: Local::now(),
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
 
     save("test.json", &schedule);

@@ -19,6 +19,7 @@ const PULSE_PASSED_US: u64 = 2650;
 const PULSE_CLOSED_1_US: u64 = 1440;
 const PULSE_OPEN_1_US: u64 = 860;
 const PULSE_PASSED_1_US: u64 = 1700;
+const SCHEDULE_FILE_NAME: &str = "schedule.json";
 
 fn feed_cat(servo: &servo::Servo, feed_time: u64) -> Result<(), Box<dyn Error>> {
     match servo.pwm {
@@ -52,6 +53,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
@@ -64,6 +67,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(8, 30, 0),
@@ -76,6 +81,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(9, 30, 0),
@@ -88,6 +95,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(10, 30, 0),
@@ -100,6 +109,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
@@ -112,6 +123,22 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
+    });
+    schedule.push(schedule::Occasion {
+        time: Local.ymd(1970, 1, 1).and_hms(12, 30, 0),
+        enabled_weekdays: vec![
+            Weekday::Mon,
+            Weekday::Tue,
+            Weekday::Wed,
+            Weekday::Thu,
+            Weekday::Fri,
+            Weekday::Sat,
+            Weekday::Sun,
+        ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
@@ -124,6 +151,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
@@ -136,18 +165,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
-    });
-    schedule.push(schedule::Occasion {
-        time: Local.ymd(1970, 1, 1).and_hms(11, 30, 0),
-        enabled_weekdays: vec![
-            Weekday::Mon,
-            Weekday::Tue,
-            Weekday::Wed,
-            Weekday::Thu,
-            Weekday::Fri,
-            Weekday::Sat,
-            Weekday::Sun,
-        ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(15, 30, 0),
@@ -160,6 +179,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(16, 30, 0),
@@ -172,6 +193,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(17, 30, 0),
@@ -184,6 +207,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(18, 30, 0),
@@ -196,6 +221,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(19, 30, 0),
@@ -208,6 +235,8 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
     schedule.push(schedule::Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(20, 30, 0),
@@ -220,16 +249,40 @@ fn create_default_schedule(schedule: &mut schedule::Schedule) {
             Weekday::Sat,
             Weekday::Sun,
         ],
+        opened_time_servo1: 320,
+        opened_time_servo2: 280,
     });
 }
 
 fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
     let mut schedule = schedule::Schedule::new();
-    create_default_schedule(&mut schedule);
+
+    let created_default = match persistant_schedule_storage::load(SCHEDULE_FILE_NAME) {
+        Ok(x) => {
+            println!("Persisted schedule found, using it");
+            schedule = x;
+            false
+        },
+        Err(_) =>  { 
+            println!("Persisted schedule doesnt exist, creating new");
+            create_default_schedule(&mut schedule);
+            true
+        }
+    };
+
+    if created_default {
+        match persistant_schedule_storage::save(SCHEDULE_FILE_NAME, &schedule) {
+            Ok(_) => {},
+            Err(_) => println!("Failed to persist schedule")
+        }
+    }
+
     loop {
         let local = Local::now();
 
-        if schedule.contains(local) {
+        let result = schedule.contains(local);
+
+        if result.is_some() {
             let pwm1 = Pwm::with_period(
                 Channel::Pwm1,
                 Duration::from_millis(PERIOD_MS),
@@ -255,7 +308,7 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
                 }
             };
 
-            match feed_cat(&servo2, 4200 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo2, result.unwrap().opened_time_servo2) {
                 // 2900 tot
                 Ok(_) => println!("Fed the cat with servo 2"),
                 Err(_) => println!("Failed to feed the cat with servo 2"),
@@ -289,7 +342,7 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
                     }
                 }
             };
-            match feed_cat(&servo1, 4200 / schedule.occasions(local.weekday()) as u64) {
+            match feed_cat(&servo1, result.unwrap().opened_time_servo1) {
                 // 2150 tot
                 Ok(_) => println!("Fed the cat with servo 1"),
                 Err(_) => println!("Failed to feed the cat with servo 1"),

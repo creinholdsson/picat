@@ -6,6 +6,8 @@ pub struct Schedule {
 pub struct Occasion {
     pub time: DateTime<Local>,
     pub enabled_weekdays: Vec<Weekday>,
+    pub opened_time_servo1: u64,
+    pub opened_time_servo2: u64
 }
 
 impl Occasion {
@@ -29,23 +31,16 @@ impl Schedule {
         self.times.push(time);
     }
 
-    pub fn contains(&self, time: DateTime<Local>) -> bool {
+    pub fn contains(&self, time: DateTime<Local>) -> Option<&Occasion> {
         for elem in self.times.iter() {
             if elem.is_enabled(time.weekday())
                 && elem.time.hour() == time.hour()
                 && elem.time.minute() == time.minute()
             {
-                return true;
+                return Some(elem);
             }
         }
-        false
-    }
-
-    pub fn occasions(&self, weekday: Weekday) -> i32 {
-        self.times
-            .iter()
-            .filter(|&x| (*x).is_enabled(weekday))
-            .count() as i32
+        None
     }
 
     pub fn get_times(&self) -> &Vec<Occasion> {
@@ -59,12 +54,13 @@ fn contains_true() {
     schedule.push(Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
         enabled_weekdays: vec![Weekday::Thu],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300,
     });
 
     assert_eq!(
-        schedule.contains(Local.ymd(1970, 1, 1).and_hms(7, 30, 10)),
-        true
-    );
+        schedule.contains(Local.ymd(1970, 1, 1).and_hms(7, 30, 10)).is_some(), 
+        true);
 }
 
 #[test]
@@ -73,12 +69,13 @@ fn contains_false() {
     schedule.push(Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
 
     assert_eq!(
-        schedule.contains(Local.ymd(1970, 1, 1).and_hms(7, 31, 0)),
-        false
-    );
+        schedule.contains(Local.ymd(1970, 1, 1).and_hms(7, 31, 0)).is_some(),
+        false);
 }
 
 #[test]
@@ -86,6 +83,8 @@ fn occasion_enabled_true() {
     let occasion = Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
         enabled_weekdays: vec![Weekday::Mon],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     };
 
     assert_eq!(occasion.is_enabled(Weekday::Mon), true);
@@ -96,6 +95,8 @@ fn occasion_enabled_false() {
     let occasion = Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
         enabled_weekdays: vec![Weekday::Mon],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     };
 
     assert_eq!(occasion.is_enabled(Weekday::Tue), false);
@@ -107,14 +108,20 @@ fn schedule_occasion_count() {
     schedule.push(Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(7, 30, 0),
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
     schedule.push(Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(8, 30, 0),
         enabled_weekdays: vec![Weekday::Mon, Weekday::Tue],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
     schedule.push(Occasion {
         time: Local.ymd(1970, 1, 1).and_hms(8, 30, 0),
         enabled_weekdays: vec![Weekday::Fri],
+        opened_time_servo1: 300,
+        opened_time_servo2: 300
     });
 
     assert_eq!(schedule.occasions(Weekday::Mon), 2);
