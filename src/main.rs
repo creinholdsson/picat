@@ -283,39 +283,39 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
         let result = schedule.contains(local);
 
         if result.is_some() {
-            let pwm1 = Pwm::with_period(
-                Channel::Pwm1,
-                Duration::from_millis(PERIOD_MS),
-                Duration::from_micros(PULSE_CLOSED_1_US),
-                Polarity::Normal,
-                true,
-            );
-            let servo2 = match pwm1 {
-                Ok(ref p) => servo::Servo {
-                    pulse_closed: PULSE_CLOSED_1_US,
-                    pulse_open: PULSE_OPEN_1_US,
-                    pulse_passed: PULSE_PASSED_1_US,
-                    pwm: Some(p),
-                },
-                Err(_) => {
-                    println!("Failed to create servo2, using dummy");
-                    servo::Servo {
-                        pulse_closed: PULSE_CLOSED_US,
-                        pulse_open: PULSE_OPEN_US,
-                        pulse_passed: PULSE_PASSED_1_US,
-                        pwm: None,
-                    }
-                }
-            };
+            // let pwm1 = Pwm::with_period(
+            //     Channel::Pwm1,
+            //     Duration::from_millis(PERIOD_MS),
+            //     Duration::from_micros(PULSE_CLOSED_1_US),
+            //     Polarity::Normal,
+            //     true,
+            // );
+            // let servo2 = match pwm1 {
+            //     Ok(ref p) => servo::Servo {
+            //         pulse_closed: PULSE_CLOSED_1_US,
+            //         pulse_open: PULSE_OPEN_1_US,
+            //         pulse_passed: PULSE_PASSED_1_US,
+            //         pwm: Some(p),
+            //     },
+            //     Err(_) => {
+            //         println!("Failed to create servo2, using dummy");
+            //         servo::Servo {
+            //             pulse_closed: PULSE_CLOSED_US,
+            //             pulse_open: PULSE_OPEN_US,
+            //             pulse_passed: PULSE_PASSED_1_US,
+            //             pwm: None,
+            //         }
+            //     }
+            // };
 
-            match feed_cat(&servo2, result.unwrap().opened_time_servo2) {
-                // 2900 tot
-                Ok(_) => println!("Fed the cat with servo 2"),
-                Err(_) => println!("Failed to feed the cat with servo 2"),
-            }
+            // match feed_cat(&servo2, result.unwrap().opened_time_servo2) {
+            //     // 2900 tot
+            //     Ok(_) => println!("Fed the cat with servo 2"),
+            //     Err(_) => println!("Failed to feed the cat with servo 2"),
+            // }
 
-            pwm1?.disable().unwrap_or(());
-            thread::sleep(Duration::from_millis(3000));
+            // pwm1?.disable().unwrap_or(());
+            // thread::sleep(Duration::from_millis(3000));
 
             let pwm = Pwm::with_period(
                 Channel::Pwm0,
@@ -358,38 +358,38 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
 }
 
 fn test_servo_loop() -> Result<(), Box<dyn Error>> {
-    let pwm1 = Pwm::with_period(
-        Channel::Pwm1,
-        Duration::from_millis(PERIOD_MS),
-        Duration::from_micros(PULSE_CLOSED_1_US),
-        Polarity::Normal,
-        true,
-    );
-    let servo2 = match pwm1 {
-        Ok(ref p) => servo::Servo {
-            pulse_closed: PULSE_CLOSED_1_US,
-            pulse_open: PULSE_OPEN_1_US,
-            pulse_passed: PULSE_PASSED_1_US,
-            pwm: Some(p),
-        },
-        Err(_) => {
-            println!("Failed to create servo2, using dummy");
-            servo::Servo {
-                pulse_closed: PULSE_CLOSED_US,
-                pulse_open: PULSE_OPEN_US,
-                pulse_passed: PULSE_PASSED_1_US,
-                pwm: None,
-            }
-        }
-    };
+    // let pwm1 = Pwm::with_period(
+    //     Channel::Pwm1,
+    //     Duration::from_millis(PERIOD_MS),
+    //     Duration::from_micros(PULSE_CLOSED_1_US),
+    //     Polarity::Normal,
+    //     true,
+    // );
+    // let servo2 = match pwm1 {
+    //     Ok(ref p) => servo::Servo {
+    //         pulse_closed: PULSE_CLOSED_1_US,
+    //         pulse_open: PULSE_OPEN_1_US,
+    //         pulse_passed: PULSE_PASSED_1_US,
+    //         pwm: Some(p),
+    //     },
+    //     Err(_) => {
+    //         println!("Failed to create servo2, using dummy");
+    //         servo::Servo {
+    //             pulse_closed: PULSE_CLOSED_US,
+    //             pulse_open: PULSE_OPEN_US,
+    //             pulse_passed: PULSE_PASSED_1_US,
+    //             pwm: None,
+    //         }
+    //     }
+    // };
 
-    match feed_cat(&servo2, 1000) {
-        // 2900 tot
-        Ok(_) => println!("Fed the cat with servo 2"),
-        Err(_) => println!("Failed to feed the cat with servo 2"),
-    }
-    pwm1?.disable().unwrap_or(());
-    thread::sleep(Duration::from_millis(3000));
+    // match feed_cat(&servo2, 1000) {
+    //     // 2900 tot
+    //     Ok(_) => println!("Fed the cat with servo 2"),
+    //     Err(_) => println!("Failed to feed the cat with servo 2"),
+    // }
+    // pwm1?.disable().unwrap_or(());
+    // thread::sleep(Duration::from_millis(3000));
     let pwm = Pwm::with_period(
         Channel::Pwm0,
         Duration::from_millis(PERIOD_MS),
