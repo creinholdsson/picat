@@ -357,7 +357,7 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
     }
 }
 
-fn test_servo_loop() -> Result<(), Box<dyn Error>> {
+fn test_servo_loop(delay_time: u64) -> Result<(), Box<dyn Error>> {
     // let pwm1 = Pwm::with_period(
     //     Channel::Pwm1,
     //     Duration::from_millis(PERIOD_MS),
@@ -415,7 +415,7 @@ fn test_servo_loop() -> Result<(), Box<dyn Error>> {
         }
     };
 
-    match feed_cat(&servo1, 1000) {
+    match feed_cat(&servo1, delay_time) {
         // 2150 tot
         Ok(_) => println!("Fed the cat with servo 1"),
         Err(_) => println!("Failed to feed the cat with servo 1"),
@@ -433,8 +433,9 @@ fn main() -> std::io::Result<()> {
 
     match args.len() {
         2 => {
-            println!("Running servo test");
-            match test_servo_loop() {
+            let delay_time = u64::from_str_radix(&args[1], 10).unwrap();
+            println!("Running servo test with delay time {}", delay_time);
+            match test_servo_loop(delay_time) {
                 Ok(_) => println!("Exited successfully"),
                 Err(_) => println!("Error happened"),
             };
