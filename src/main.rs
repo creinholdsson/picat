@@ -357,6 +357,44 @@ fn main_feeder_loop() -> Result<(), Box<dyn Error>> {
     }
 }
 
+fn open_servo() -> Result<(), Box<dyn Error>> {
+    let pwm = Pwm::with_period(
+        Channel::Pwm0,
+        Duration::from_millis(PERIOD_MS),
+        Duration::from_micros(PULSE_CLOSED_US),
+        Polarity::Normal,
+        true,
+    );
+    let servo1 = match pwm {
+        Ok(ref p) => servo::Servo {
+            pulse_closed: PULSE_CLOSED_US,
+            pulse_open: PULSE_OPEN_US,
+            pulse_passed: PULSE_PASSED_US,
+            pwm: Some(p),
+        },
+        Err(_) => {
+            println!("Failed to create servo1, using dummy");
+            servo::Servo {
+                pulse_closed: PULSE_CLOSED_US,
+                pulse_open: PULSE_OPEN_US,
+                pulse_passed: PULSE_PASSED_US,
+                pwm: None,
+            }
+        }
+    };
+
+    match servo1.pwm {
+        Some(pwm) => {
+            pwm.set_pulse_width(Duration::from_micros(servo1.pulse_open))?;
+            thread::sleep(Duration::from_millis(1000));
+        }
+        None => {
+            println!("Was gonna feed the cat!");
+        }
+    }
+    Ok(())
+}
+
 fn test_servo_loop(delay_time: u64) -> Result<(), Box<dyn Error>> {
     // let pwm1 = Pwm::with_period(
     //     Channel::Pwm1,
@@ -433,12 +471,22 @@ fn main() -> std::io::Result<()> {
 
     match args.len() {
         2 => {
-            let delay_time = u64::from_str_radix(&args[1], 10).unwrap();
-            println!("Running servo test with delay time {}", delay_time);
-            match test_servo_loop(delay_time) {
-                Ok(_) => println!("Exited successfully"),
-                Err(_) => println!("Error happened"),
-            };
+            match &args[1][..] {
+                "open" =>  {
+                    match open_servo() {
+                        Ok(_) => println!("Exited successfully"),
+                        Err(_) => println!("Error happened"),
+                    }
+                },
+                _ => {
+                    let delay_time = u64::from_str_radix(&args[1], 10).unwrap();
+                    println!("Running servo test with delay time {}", delay_time);
+                    match test_servo_loop(delay_time) {
+                        Ok(_) => println!("Exited successfully"),
+                        Err(_) => println!("Error happened"),
+                    };
+                }
+            }
             Ok(())
         }
         _ => {
